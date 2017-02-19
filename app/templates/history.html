@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}天气在线查询{% endblock %}
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="span5 well pricehover">
+			<ul class="nav nav-pills">
+				<li><a href="{{url_for('index', _external=True)}}">天气查询</a></li>
+				<li class="active"><a href="#">历史查询</a></li>
+				<li><a href="{{url_for('about', _external=True)}}">About</a></li>
+			</ul>
+		</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<table class="table table-striped">
+            <thead>
+            <tr>
+                    <th>#</th>
+                    <th>时间</th>
+                    <th>IP</th>
+                    <th>所在地</th>
+                    <th>查询城市</th>
+                    <th>天气情况</th>
+                    <th>天气图标</th>
+                    <th>最低温度</th>
+                    <th>最高温度</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td>{{h['id']}}</td>
+                    <td>{{h['time']}}</td>
+                    <td>{{h['ip']}}</td>
+                    <td>{{h['location']}}</td>
+                    <td>{{h['cityname']}}</td>
+                    <td>{{h['weather']}}</td>
+                    <td><img src="./static/{{h['weathercode']}}.png" height="30" width="30"></td>
+                    <td>{{h['tempmin']}} ℃</td>
+                    <td>{{h['tempmax']}} ℃</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+
+{% endblock %}
