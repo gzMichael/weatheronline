@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 80
 
 CMD python /app/run.py runserver --host 0.0.0.0
 
