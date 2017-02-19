@@ -10,5 +10,5 @@ RUN pip install -r requirements.txt
 
 CMD python /app/run.py runserver --host 0.0.0.0
 
-EXPOSE 80
+EXPOSE 5000
 
