@@ -1,14 +1,16 @@
-FROM daocloud.io/python:3.6
+FROM ubuntu:14.04
 MAINTAINER gzMichael <michaelch@126.com>
 
-RUN mkdir -p /app
+RUN apt-get update && apt-get install -y vim net-tools && \
+    rm -rf /var/lib/apt/lists/* && mkdir -p /app
 COPY . /app
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-EXPOSE 80
+COPY web_start.sh /usr/local/bin/web_start.sh
+EXPOSE 5000
 
-CMD python /app/run.py runserver --host 0.0.0.0
+ENTRYPOINT [“/app/run.sh"]
 
