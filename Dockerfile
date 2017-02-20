@@ -9,7 +9,8 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY web_start.sh /usr/local/bin/web_start.sh
+RUN chmod +x /usr/local/bin/web_start.sh
 EXPOSE 5000
 
-ENTRYPOINT [“/usr/local/bin/web_start.sh"]
+ENTRYPOINT [“web_start.sh"]
 
