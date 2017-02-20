@@ -12,5 +12,5 @@ COPY web_start.sh /usr/local/bin/web_start.sh
 RUN chmod +x /usr/local/bin/web_start.sh
 EXPOSE 5000
 
-ENTRYPOINT [“web_start.sh"]
+ENTRYPOINT ["web_start.sh"]
 
