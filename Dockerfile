@@ -1,13 +1,9 @@
-FROM python:3.6
+FROM python:3-onbuild
 
-RUN mkdir -p /app
-COPY . /app
-WORKDIR /app
-
-RUN pip install -r requirements.txt
-COPY qwonline_start.sh /usr/local/bin/qwonline_start.sh
-RUN chmod +x /usr/local/bin/qwonline_start.sh
+RUN mkdir -p /usr/src/app
+COPY . /usr/src/app
+WORKDIR /usr/src/app
 
 EXPOSE 80
 
-ENTRYPOINT ["qwonline_start.sh"]
+ENTRYPOINT ["./python","run.py"]
