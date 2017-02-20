@@ -5,7 +5,9 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install -r requirements.txt
+COPY qwonline_start.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/qwonline_start.sh
 
 EXPOSE 80
 
-CMD [ "/app/qwonline_start.sh"]
+ENTRYPOINT ["qwonline_start.sh"]
