@@ -11,5 +11,5 @@ RUN pip install -r requirements.txt
 COPY web_start.sh /usr/local/bin/web_start.sh
 EXPOSE 5000
 
-ENTRYPOINT [“/app/web_start.sh"]
+ENTRYPOINT [“/usr/local/bin/web_start.sh"]
 
