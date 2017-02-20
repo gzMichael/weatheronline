@@ -1,16 +1,11 @@
-FROM daocloud.io/python:3.5
-MAINTAINER gzMichael <michaelch@126.com>
+FROM python:3.6
 
 RUN mkdir -p /app
 COPY . /app
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY web_start.sh /usr/local/bin/web_start.sh
-RUN chmod +x /usr/local/bin/web_start.sh
 EXPOSE 5000
 
-ENTRYPOINT ["web_start.sh"]
-
+CMD [ "python","run.py"]
