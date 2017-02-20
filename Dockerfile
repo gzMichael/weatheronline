@@ -6,4 +6,4 @@ WORKDIR /usr/src/app
 
 EXPOSE 80
 
-ENTRYPOINT ["python","./run.py"]
+CMD ["python","./run.py"]
