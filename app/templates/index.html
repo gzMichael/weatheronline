@@ -23,7 +23,8 @@
         <br />
         {% if dict_weather_forecast %}
         {% if dict_weather_forecast['status_code'] == '200' %}
-        {{city_name}} 的天气情况如下：
+        目前数据源切换至OpenWeatherMap，请查询时输入拼音全称。如想查询广州，请输入"guangzhou"。
+        {{city_name}} 的天气情况如下： 
         <table class="table table-striped">
             <tbody>
                 <tr align="center" valign="middle">
