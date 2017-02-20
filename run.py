@@ -6,4 +6,4 @@ from flask_bootstrap import Bootstrap
 if __name__ == '__main__':
     app.debug = True
     bootstrap = Bootstrap(app)
-    app.run()
+    app.run(port=80)
