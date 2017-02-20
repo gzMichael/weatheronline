@@ -26,7 +26,7 @@ def index():
     if queryform.city_name.data:
         print(queryform.city_name.data)
         city_name = queryform.city_name.data
-        dict_weather_forecast = api_owm.get_weather_forecast(city_name)
+        dict_weather_forecast = api_tp.get_weather_forecast(city_name)
         if dict_weather_forecast:
             if dict_weather_forecast['status_code'] == '200':
                 history = History()
