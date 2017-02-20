@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER gzMichael <michaelch@126.com>
 
-RUN apt-get update && apt-get install -y python3 net-tools && \
+RUN apt-get update && apt-get install -y python3 python-pip python-dev build-essential net-tools && \
     rm -rf /var/lib/apt/lists/* && mkdir -p /app
 COPY . /app
 WORKDIR /app
