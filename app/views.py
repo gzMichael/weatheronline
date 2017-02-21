@@ -55,20 +55,6 @@ def index():
         #如果接口有数据返回
         if dict_weather:
             if dict_weather['status_code'] == '200':
-                history = History()
-                history.cityname = city_name
-                history.ip = ip_str
-                dt = datetime.datetime.now()
-                history.time = dt.strftime("%Y-%m-%d %H:%M:%S")
-                print(dt.strftime("%Y-%m-%d %H:%M:%S"))
-                history.location = location_str
-                history.api = api_str
-                history.weather = dict_weather['weather_d0']
-                history.weathercode = dict_weather['weather_code_d0']
-                history.tempmin = dict_weather['temp_min_d0']
-                history.tempmax = dict_weather['temp_max_d0']
-                db.session.add(history)
-                db.session.commit()
                 if temp_unit == '2':
                     print(dict_weather['temp_min_d0'])
                     a = dict_weather['temp_min_d0']
@@ -83,6 +69,21 @@ def index():
                     temp_unit_str = '℉'
                 else:
                     temp_unit_str = '℃'
+                history = History()
+                history.cityname = city_name
+                history.ip = ip_str
+                dt = datetime.datetime.now()
+                history.time = dt.strftime("%Y-%m-%d %H:%M:%S")
+                print(dt.strftime("%Y-%m-%d %H:%M:%S"))
+                history.location = location_str
+                history.api = api_str
+                history.weather = dict_weather['weather_d0']
+                history.weathercode = dict_weather['weather_code_d0']
+                history.tempunit = temp_unit_str
+                history.tempmin = dict_weather['temp_min_d0']
+                history.tempmax = dict_weather['temp_max_d0']
+                db.session.add(history)
+                db.session.commit()
         return render_template('index.html', form=queryform, city_name=city_name, api=api_str,
             weather=dict_weather, unit=temp_unit_str)
     else:

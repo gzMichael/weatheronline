@@ -11,6 +11,7 @@ class History(db.Model):
     api = db.Column(db.String(40))
     weather = db.Column(db.String(20))
     weathercode = db.Column(db.String(10))
+    tempunit = db.Column(db.String(10))
     tempmin = db.Column(db.Float)
     tempmax = db.Column(db.Float)
 

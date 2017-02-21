@@ -43,8 +43,8 @@
                     <td>{{h['cityname']}}</td>
                     <td>{{h['weather']}}</td>
                     <td><img src="./static/{{h['weathercode']}}.png" height="30" width="30"></td>
-                    <td>{{h['tempmin']}} ℃</td>
-                    <td>{{h['tempmax']}} ℃</td>
+                    <td>{{h['tempmin']}} {{h['tempunit']}}</td>
+                    <td>{{h['tempmax']}} {{h['tempunit']}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
