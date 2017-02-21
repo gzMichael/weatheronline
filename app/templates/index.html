@@ -18,44 +18,44 @@
 
 {% block page_content %}
 	<div class="page-header">
+        {% if api %}
         天气数据来源:{{api}}<p>
-        
+        {% endif %}
         {{ wtf.quick_form(form) }}
         <br />
         提示：输入中文将调用心知天气，查询国内城市天气；输入英文将调用OpenWeatherMap，查询全球城市天气。<p>
-        {% if dict_weather_forecast %}
-        {% if dict_weather_forecast['status_code'] == '200' %}
-        
+        {% if weather %}
+        {% if weather['status_code'] == '200' %}
         <b>{{city_name}} </b>的天气情况如下： 
         <table class="table table-striped">
             <tbody>
                 <tr align="center" valign="middle">
                     <td align="center" valign="middle">今天</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['date_d0']}}</td>
-                    <td><img src="./static/{{dict_weather_forecast['weather_code_d0']}}.png" height="30" width="30"></td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['weather_d0']}}</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['temp_min_d0']}} ~ {{dict_weather_forecast['temp_max_d0']}} ℃</td>
+                    <td align="center" valign="middle">{{weather['date_d0']}}</td>
+                    <td><img src="./static/{{weather['weather_code_d0']}}.png" height="30" width="30"></td>
+                    <td align="center" valign="middle">{{weather['weather_d0']}}</td>
+                    <td align="center" valign="middle">{{weather['temp_min_d0']}} ~ {{weather['temp_max_d0']}} {{unit}}</td>
 
                 </tr>
                 <tr align="center" valign="middle">
                     <td align="center" valign="middle">明天</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['date_d1']}}</td>
-                    <td><img src="./static/{{dict_weather_forecast['weather_code_d1']}}.png" height="30" width="30"></td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['weather_d1']}}</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['temp_min_d1']}} ~ {{dict_weather_forecast['temp_max_d1']}} ℃</td>
+                    <td align="center" valign="middle">{{weather['date_d1']}}</td>
+                    <td><img src="./static/{{weather['weather_code_d1']}}.png" height="30" width="30"></td>
+                    <td align="center" valign="middle">{{weather['weather_d1']}}</td>
+                    <td align="center" valign="middle">{{weather['temp_min_d1']}} ~ {{weather['temp_max_d1']}} {{unit}}</td>
                 </tr>            
                 <tr align="center" valign="middle">
                     <td align="center" valign="middle">后天</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['date_d2']}}</td>
-                    <td><img src="./static/{{dict_weather_forecast['weather_code_d2']}}.png" height="30" width="30"></td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['weather_d2']}}</td>
-                    <td align="center" valign="middle">{{dict_weather_forecast['temp_min_d2']}} ~ {{dict_weather_forecast['temp_max_d2']}} ℃</td>
+                    <td align="center" valign="middle">{{weather['date_d2']}}</td>
+                    <td><img src="./static/{{weather['weather_code_d2']}}.png" height="30" width="30"></td>
+                    <td align="center" valign="middle">{{weather['weather_d2']}}</td>
+                    <td align="center" valign="middle">{{weather['temp_min_d2']}} ~ {{weather['temp_max_d2']}} {{unit}}</td>
                 </tr>
             </tbody>
         </table>  
         {% endif %}
-        {% if dict_weather_forecast['status_code'] == '404' or dict_weather_forecast['status_code'] == '502' %}
-        查询错误：{{dict_weather_forecast['message']}}
+        {% if weather['status_code'] == '404' or weather['status_code'] == '502' %}
+        查询错误：{{weather['message']}}
         {% endif %}
         {% endif %}
     </div>
