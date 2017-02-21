@@ -24,9 +24,14 @@ def index():
     dict_weather_forecast = {}
     queryform = QueryForm()
     if queryform.city_name.data:
-        print(queryform.city_name.data)
         city_name = queryform.city_name.data
-        dict_weather_forecast = api_owm.get_weather_forecast(city_name)
+        for ch in city_name:
+            if u'\u4e00' <= ch <= u'\u9fff':
+                dict_weather_forecast = api_tp.get_weather_forecast(city_name)
+                api_str = '心知天气'
+            else:
+                dict_weather_forecast = api_owm.get_weather_forecast(city_name)
+                api_str = 'OpenWeatherMap'
         if dict_weather_forecast:
             if dict_weather_forecast['status_code'] == '200':
                 history = History()
@@ -36,13 +41,14 @@ def index():
                 history.time = dt.strftime("%Y-%m-%d %H:%M:%S")
                 print(dt.strftime("%Y-%m-%d %H:%M:%S"))
                 history.location = location_str
+                history.api = api_str
                 history.weather = dict_weather_forecast['weather_d0']
                 history.weathercode = dict_weather_forecast['weather_code_d0']
                 history.tempmin = dict_weather_forecast['temp_min_d0']
                 history.tempmax = dict_weather_forecast['temp_max_d0']
                 db.session.add(history)
                 db.session.commit()
-        return render_template('index.html', form=queryform, city_name=city_name, 
+        return render_template('index.html', form=queryform, city_name=city_name, api=api_str,
             ip_str=ip_str, location_str=location_str, dict_weather_forecast=dict_weather_forecast)
     else:
         print(queryform.city_name.data)

@@ -17,15 +17,16 @@
 {% endblock %}
 
 {% block page_content %}
-
 	<div class="page-header">
+        天气数据来源:{{api}}<p>
+        
         {{ wtf.quick_form(form) }}
         <br />
+        提示：输入中文将调用心知天气，查询国内城市天气；输入英文将调用OpenWeatherMap，查询全球城市天气。<p>
         {% if dict_weather_forecast %}
         {% if dict_weather_forecast['status_code'] == '200' %}
-        数据来源:OpenWeatherMap，<br>
-        请查询时输入拼音全称，如输入"guangzhou"查询广州。<br>
-        {{city_name}} 的天气情况如下： 
+        
+        <b>{{city_name}} </b>的天气情况如下： 
         <table class="table table-striped">
             <tbody>
                 <tr align="center" valign="middle">

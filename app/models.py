@@ -8,6 +8,7 @@ class History(db.Model):
     ip = db.Column(db.String(40))
     time = db.Column(db.String(40))
     location = db.Column(db.String(40))
+    api = db.Column(db.String(40))
     weather = db.Column(db.String(20))
     weathercode = db.Column(db.String(10))
     tempmin = db.Column(db.Float)
