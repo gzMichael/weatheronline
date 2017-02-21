@@ -15,6 +15,12 @@ class QueryForm(FlaskForm):
     city_name = StringField('需要查询天气的城市名称', validators=[DataRequired()])
     submit = SubmitField('查询')
     
+def check_zh_or_en(check_str):
+    for ch in city_name:
+            if u'\u4e00' <= ch <= u'\u9fff':
+                return True
+    return False
+                
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
@@ -25,13 +31,14 @@ def index():
     queryform = QueryForm()
     if queryform.city_name.data:
         city_name = queryform.city_name.data
-        for ch in city_name:
-            if u'\u4e00' <= ch <= u'\u9fff':
-                dict_weather_forecast = api_tp.get_weather_forecast(city_name)
-                api_str = '心知天气'
-            else:
-                dict_weather_forecast = api_owm.get_weather_forecast(city_name)
-                api_str = 'OpenWeatherMap'
+        #根据是否输入中文，调用不同的接口
+        if check_zh_or_en(city_name):
+            dict_weather_forecast = api_tp.get_weather_forecast(city_name)
+            api_str = '心知天气'
+        else:
+            dict_weather_forecast = api_owm.get_weather_forecast(city_name)
+            api_str = 'OpenWeatherMap'
+        #如果接口有数据返回
         if dict_weather_forecast:
             if dict_weather_forecast['status_code'] == '200':
                 history = History()
