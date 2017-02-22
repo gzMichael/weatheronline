@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 from app import app
-from flask import render_template, request
+from flask import render_template, request, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
@@ -84,16 +84,20 @@ def index():
                 history.tempmax = dict_weather['temp_max_d0']
                 db.session.add(history)
                 db.session.commit()
-        return render_template('index.html', form=queryform, city_name=city_name, api=api_str,
-            weather=dict_weather, unit=temp_unit_str)
+                return render_template('index.html', form=queryform, city_name=city_name, api=api_str,
+                    weather=dict_weather, unit=temp_unit_str)
+            else:
+                error_str = dict_weather['message']
+                flash(error_str, 'warning')      
+                return render_template('index.html', form=queryform)
     else:
-        print(queryform.city_name.data)
         return render_template('index.html', form=queryform, location_str=location_str)
 
 @app.route('/history')
 def history():
     history = db.session.query(History).all()
-    print(history)
+    if not history:
+       flash(u'历史记录不存在', 'warning') 
     return render_template('history.html', history=history)
 
 @app.route('/about')

@@ -22,6 +22,13 @@
         天气数据来源:{{api}}<p>
         {% endif %}
         {{ wtf.quick_form(form) }}
+
+        <br />
+        {% for message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ message[0] }}">
+                {{ message[1] }}
+            </div>
+        {% endfor %}
         <br />
         提示：输入中文将调用心知天气，查询国内城市天气；输入英文将调用OpenWeatherMap，查询全球城市天气。<p>
         {% if weather %}
