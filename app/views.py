@@ -103,7 +103,7 @@ def history(page = 1):
     records = pagination.items
     if not history:
        flash(u'历史记录不存在', 'warning') 
-    return render_template('history.html', pagination=pagination, records=records)
+    return render_template('history.html', history=history, pagination=pagination, records=records)
 
 @app.route('/about')
 def about():
