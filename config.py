@@ -6,3 +6,4 @@ SECRET_KEY = 'qwonline_secret_key'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'history.sqlite')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+RECORDS_PER_PAGE = 8

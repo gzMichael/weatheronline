@@ -22,7 +22,7 @@
         {{ message[1] }}
     </div>
 {% endfor %}
-{% if history %}
+{% if pagination %}
 <table class="table table-striped">
             <thead>
             <tr>
@@ -39,21 +39,34 @@
                 </tr>
             </thead>
             <tbody>
-                {% for h in history %}
+                {% for record in records %}
                 <tr>
-                    <td>{{h['id']}}</td>
-                    <td>{{h['time']}}</td>
-                    <td>{{h['ip']}}</td>
-                    <td>{{h['location']}}</td>
-                    <td>{{h['api']}}</td>
-                    <td>{{h['cityname']}}</td>
-                    <td>{{h['weather']}}</td>
-                    <td><img src="./static/{{h['weathercode']}}.png" height="30" width="30"></td>
-                    <td>{{h['tempmin']}} {{h['tempunit']}}</td>
-                    <td>{{h['tempmax']}} {{h['tempunit']}}</td>
+                    <td>{{record['id']}}</td>
+                    <td>{{record['time']}}</td>
+                    <td>{{record['ip']}}</td>
+                    <td>{{record['location']}}</td>
+                    <td>{{record['api']}}</td>
+                    <td>{{record['cityname']}}</td>
+                    <td>{{record['weather']}}</td>
+                    <td><img src="../static/{{record['weathercode']}}.png" height="30" width="30"></td>
+                    <td>{{record['tempmin']}} {{record['tempunit']}}</td>
+                    <td>{{record['tempmax']}} {{record['tempunit']}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>  
+        
+        <div class="pagination"> 
+            {% if pagination.has_prev %} 
+                <li><a href="/history/{{ pagination.prev_num }}">上一页</a></li>
+            {% endif %} 
+                <li><a href="">{{ pagination.page }} / {{ pagination.pages }}</a></li>
+            {% if pagination.has_next %} 
+                <li><a href="/history/{{ pagination.next_num }}">下一页</a></li>
+            {% endif %} 
+                </div> 
+            </div> 
+        </div>
+
 {% endif %}
 {% endblock %}

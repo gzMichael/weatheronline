@@ -3,8 +3,10 @@ import datetime
 from app import app
 from flask import render_template, request, flash
 from flask_wtf import FlaskForm
+#from flask_sqlalchemy import paginate
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
+from config import RECORDS_PER_PAGE
 from app.myipquery import locationquery
 from app.models import History
 from app import db
@@ -94,11 +96,13 @@ def index():
         return render_template('index.html', form=queryform, location_str=location_str)
 
 @app.route('/history')
-def history():
-    history = db.session.query(History).all()
-    if not history:
+@app.route('/history/<int:page>')
+def history(page = 1):
+    pagination = History.query.paginate(page, RECORDS_PER_PAGE, False)
+    records = pagination.items
+    if not pagination:
        flash(u'历史记录不存在', 'warning') 
-    return render_template('history.html', history=history)
+    return render_template('history.html', pagination=pagination, records=records)
 
 @app.route('/about')
 def about():
