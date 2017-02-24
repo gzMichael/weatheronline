@@ -6,4 +6,4 @@ WORKDIR /usr/src/app
 
 EXPOSE 80
 
-CMD ["python","./run.py --runserver 0.0.0.0"]
+CMD ["python","./run.py"]
