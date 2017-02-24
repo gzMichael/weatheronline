@@ -98,8 +98,8 @@ def index():
 @app.route('/history')
 @app.route('/history/<int:page>')
 def history(page = 1):
-    history = History.query.all()
-    pagination = History.query.paginate(page, RECORDS_PER_PAGE, False)
+    history = History.query.order_by(db.desc(History.id))
+    pagination = history.paginate(page, RECORDS_PER_PAGE, False)
     records = pagination.items
     if not history:
        flash(u'历史记录不存在', 'warning') 
