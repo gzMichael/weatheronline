@@ -101,9 +101,12 @@ def history(page = 1):
     history = History.query.order_by(db.desc(History.id))
     pagination = history.paginate(page, RECORDS_PER_PAGE, False)
     records = pagination.items
-    if not history:
-       flash(u'历史记录不存在', 'warning') 
-    return render_template('history.html', history=history, pagination=pagination, records=records)
+    history_not_empty = True
+    if not history is None:
+       flash(u'历史记录不存在', 'warning')
+       history_not_empty = False
+    return render_template('history.html', history_not_empty=history_not_empty, 
+        pagination=pagination, records=records)
 
 @app.route('/about')
 def about():
