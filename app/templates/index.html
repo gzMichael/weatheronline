@@ -33,7 +33,7 @@
         提示：输入中文将调用心知天气，查询国内城市天气；输入英文将调用OpenWeatherMap，查询全球城市天气。<p>
         {% if weather %}
         {% if weather['status_code'] == '200' %}
-        <p>{{city_name}} </p>的天气情况如下： 
+        <b>{{city_name}} </b>的天气情况如下： 
         <table class="table table-striped">
             <tbody>
                 <tr align="center" valign="middle">
