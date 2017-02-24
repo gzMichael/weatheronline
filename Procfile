@@ -1,1 +1,1 @@
-web: python run.py runserver 0.0.0.0:80
+web: python run.py runserver 0.0.0.0:5000
